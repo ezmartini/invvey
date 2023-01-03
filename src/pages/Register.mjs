@@ -1,10 +1,37 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { register } from "../api/user.js";
 
-function registerForm() {
+function RegisterForm() {
+  const [username, setUsername] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setErrMessage(
+        "Oops! Looks like you may have missed typed your password. Try again."
+      );
+    } else {
+      setErrMessage("");
+      const userData = { username, businessName, password };
+      const response = await register(userData);
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+      {errMessage && (
+        <p className="alert alert-danger mt-3" role="alert">
+          {" "}
+          {errMessage}{" "}
+        </p>
+      )}
       <div className="form-group">
-        <label for="registerUsername">Username</label>
+        <label htmlFor="registerUsername">Username</label>
         <input
           type="username"
           className="form-control mb-2"
@@ -12,18 +39,20 @@ function registerForm() {
           aria-describedby="inputUsername"
           placeholder="Create a username"
           minLength="4"
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <label for="registerBusiness">Business Name</label>
+        <label htmlFor="registerBusiness">Business Name</label>
         <input
           type="text"
           className="form-control mb-2"
           id="businessNameInput"
           aria-describedby="InputBusinessName"
           placeholder="Name of your business"
+          onChange={(e) => setBusinessName(e.target.value)}
           required
         />
 
-        <label for="registerPassword" className="mb-0">
+        <label htmlFor="registerPassword" className="mb-0">
           {" "}
           Enter a password{" "}
         </label>
@@ -36,21 +65,23 @@ function registerForm() {
           id="passwordInput"
           aria-describedby="inputPassword"
           placeholder="A secure password you'll remember"
+          onChange={(e) => setPassword(e.target.value)}
           minLength="6"
         />
 
-        <label for="confirmPassword"> Confirm Password </label>
+        <label htmlFor="confirmPassword"> Confirm Password </label>
         <input
           type="password"
           className="form-control mb-2"
           id="confirmPasswordInput"
           aria-describedby="inputPasswordConfirm"
           placeholder="Confirm your password"
+          onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
       </div>
 
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" className="btn btn-primary">
         Register
       </button>
     </form>
@@ -64,7 +95,7 @@ function Register() {
         {" "}
         Already have an account? Click <Link to="/login">here</Link> to login!
       </h4>
-      {registerForm()}
+      {RegisterForm()}
     </div>
   );
 }
