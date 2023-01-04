@@ -18,18 +18,8 @@ function RegisterForm() {
     } else {
       setErrMessage("");
       const userData = { username, businessName, password };
-      try {
-        const response = await register(userData);
-        console.log(response);
-      } catch (err) {
-        if (err.response.status === 409) {
-          setErrMessage(
-            "Oops! Looks like that username already exists. Try another username?"
-          );
-        } else {
-          setErrMessage("An unknown error occurred. Please try again. ");
-        }
-      }
+      const response = await register(userData);
+      console.log(response);
     }
   };
 

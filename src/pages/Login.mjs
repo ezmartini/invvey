@@ -15,7 +15,7 @@ function RegisterForm() {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {errMessage && (
         <p className="alert alert-danger mt-3" role="alert">
           {" "}
