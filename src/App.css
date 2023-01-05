@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+#total-card {
+  background-color: #cce5ff;
+}
+
+#low-card {
+  background-color: #fff3cd;
+}
+
+#zero-card {
+  background-color: #f8d7da;
+}
+
+.product-card {
+  transition: .8s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
