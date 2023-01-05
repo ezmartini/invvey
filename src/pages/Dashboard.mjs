@@ -55,7 +55,7 @@ function Dashboard() {
       <section className="container mt-4">
         {" "}
         <h1> Dashboard </h1> <ProductCards />
-        <hr class="hr" />
+        <hr className="hr" />
         <CollectionsAndProductsPreview />
       </section>
     </>

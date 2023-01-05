@@ -15,7 +15,10 @@ function CollectionsAndProductsPreview() {
   return (
     <>
       {" "}
-      <h3 className="mt-4"> Products & Collections for House of Beauty</h3>{" "}
+      <h3 className="mt-4">
+        {" "}
+        Overview of Products & Collections for House of Beauty
+      </h3>{" "}
       <p className="muted">
         {" "}
         The most recently updated collections and products associated with your
