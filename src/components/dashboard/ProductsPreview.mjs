@@ -1,8 +1,3 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import ProductCards from "../components/dashboard/ProductCards.mjs";
-import CollectionsAndProductsPreview from "../components/dashboard/CollectionsAndProductsPreview.mjs";
-
 function ProductsPreview(props) {
   function SingularProduct(props) {
     return (
@@ -49,17 +44,4 @@ function ProductsPreview(props) {
   );
 }
 
-function Dashboard() {
-  return (
-    <>
-      <section className="container mt-4">
-        {" "}
-        <h1> Dashboard </h1> <ProductCards />
-        <hr class="hr" />
-        <CollectionsAndProductsPreview />
-      </section>
-    </>
-  );
-}
-
-export default Dashboard;
+export default ProductsPreview;
