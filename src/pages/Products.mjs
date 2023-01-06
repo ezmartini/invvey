@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/dashboard/Navbar.mjs";
+import Navbar from "../components/navbar/Navbar.mjs";
 
 export default function Products() {
   return (
