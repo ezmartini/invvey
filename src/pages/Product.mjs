@@ -20,6 +20,28 @@ export default function Product() {
   };
 
   const [productInfo, setProductInfo] = useState(initialProduct);
+  const initMode = "view";
+  const [mode, setMode] = useState(initMode);
+
+  function editStockMode() {
+    const edit = "editStock";
+    if (mode === edit) {
+      console.log("update here");
+      setMode(initMode);
+    } else {
+      setMode(edit);
+    }
+  }
+
+  function editProductMode() {
+    const edit = "editProduct";
+    if (mode === edit) {
+      console.log("update here");
+      setMode(initMode);
+    } else {
+      setMode(edit);
+    }
+  }
 
   return (
     <>
@@ -36,17 +58,22 @@ export default function Product() {
         </div>
         <p className="text-muted"> {productInfo.description} </p>
         <hr className="hr" />
-        <StockDetails productInfo={productInfo} />
-        <ProductConfigDetails productInfo={productInfo} />
+        <StockDetails productInfo={productInfo} mode={mode} />
+        <ProductConfigDetails productInfo={productInfo} mode={mode} />
         <div className="row">
           <button
             type="button"
             className="btn btn-outline-primary ml-2 mr-1 mb-1"
+            onClick={editProductMode}
           >
             Update product configuration
           </button>
 
-          <button type="button" className="btn btn-primary ml-2 mr-1 mb-1">
+          <button
+            type="button"
+            className="btn btn-primary ml-2 mr-1 mb-1"
+            onClick={editStockMode}
+          >
             Update current stock
           </button>
         </div>

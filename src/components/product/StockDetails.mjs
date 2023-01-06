@@ -1,6 +1,16 @@
 import React from "react";
+import CurrentStock from "./StockDetails/CurrentStock.mjs";
+import EditStock from "./StockDetails/EditStock.mjs";
 
 export default function StockDetails(props) {
+  function checkMode() {
+    const quantity = props.productInfo.currentQuantity;
+    if (props.mode === "editStock") {
+      return <EditStock quantity={quantity} />;
+    } else {
+      return <CurrentStock quantity={quantity} />;
+    }
+  }
   return (
     <>
       <h3> Stock details </h3>
@@ -15,7 +25,7 @@ export default function StockDetails(props) {
                 <small> Quantity currently available in your inventory. </small>
               </p>{" "}
             </th>
-            <td> {props.productInfo.currentQuantity} units </td>
+            {checkMode()}
           </tr>
 
           <tr>
