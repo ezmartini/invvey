@@ -5,6 +5,7 @@ import Register from "./pages/Register.mjs";
 import Login from "./pages/Login.mjs";
 import Dashboard from "./pages/Dashboard.mjs";
 import Products from "./pages/Products.mjs";
+import Product from "./pages/Product.mjs";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/product" element={<Product />} />
     </Routes>
   );
 }
