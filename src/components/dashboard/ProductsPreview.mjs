@@ -14,7 +14,7 @@ function ProductsPreview(props) {
   return (
     <>
       <table className="table table-hover table-sm">
-        <thead className="bg-primary text-white">
+        <thead className="bg-light text-black">
           <tr>
             <th scope="col">Product name</th>
             <th scope="col"> # Units in stock </th>
