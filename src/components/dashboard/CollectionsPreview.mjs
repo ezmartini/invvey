@@ -13,7 +13,7 @@ function CollectionsPreview() {
   return (
     <>
       <table className="table table-hover table-sm">
-        <thead className="bg-primary text-white">
+        <thead className="bg-light text-black">
           <tr>
             <th scope="col">Collection name</th>
             <th scope="col"># Products in Collection</th>
