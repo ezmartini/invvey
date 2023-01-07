@@ -13,7 +13,7 @@ export default function Product() {
     currentQuantity: 10,
     idealQuantity: 11,
     lowStockQuantity: 5,
-    stockStatus: "OK",
+    stockStatus: "Low",
     collection: "Client shampoos",
     dateUpdated: "April 2, 2022",
     dateCreated: "May 21, 2021",

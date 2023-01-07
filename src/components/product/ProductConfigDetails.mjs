@@ -3,17 +3,7 @@ import ViewIdeal from "./ProductConfig/ViewIdeal.mjs";
 import EditIdeal from "./ProductConfig/EditIdeal.mjs";
 
 export default function ProductConfigDetails(props) {
-  function checkModeIdeal() {
-    const quantity = props.productInfo.currentQuantity;
-    if (props.mode === "editProduct") {
-      return <EditIdeal quantity={quantity} />;
-    } else {
-      return <ViewIdeal quantity={quantity} />;
-    }
-  }
-
-  function checkModeLowStock() {
-    const quantity = props.productInfo.lowStockQuantity;
+  function checkMode(quantity) {
     if (props.mode === "editProduct") {
       return <EditIdeal quantity={quantity} />;
     } else {
@@ -39,7 +29,7 @@ export default function ProductConfigDetails(props) {
                 </small>
               </p>{" "}
             </th>
-            {checkModeIdeal()}
+            {checkMode(props.productInfo.idealQuantity)}
           </tr>
 
           <tr>
@@ -54,7 +44,7 @@ export default function ProductConfigDetails(props) {
                 </small>
               </p>{" "}
             </th>
-            {checkModeLowStock()}
+            {checkMode(props.productInfo.lowStockQuantity)}
           </tr>
 
           <tr>
