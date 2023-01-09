@@ -1,11 +1,24 @@
 import ProductCard from "./ProductCard.mjs";
+import { useState } from "react";
+import { myOrganizedProducts } from "../../api/products.js";
 
 function ProductCards() {
   // set states for numbers on each card here (3x api calls)
+
+  const [ok, setOk] = useState("");
+  const [low, setLow] = useState("");
+  const [zero, setZero] = useState("");
+
+  async function getOrganizedProducts() {
+    try {
+      console.log("hi");
+      const products = await myOrganizedProducts();
+    } catch (err) {}
+  }
   return (
     <>
       {" "}
-      <section>
+      <section onLoadStart={getOrganizedProducts()}>
         <div className="row mt-3">
           <ProductCard
             number="60"

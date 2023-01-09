@@ -1,17 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/user.js";
+import { useCookies } from "react-cookie";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = { username, password };
-    const response = await login(userData);
-    setErrMessage(response);
+    try {
+      const response = await login(userData);
+      if (response.token) {
+        setErrMessage("");
+        localStorage.setItem("token", response.token);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      if (err.response.status === 401) {
+        setErrMessage(
+          "Looks like the credentials you entered weren't correct. Please double check your username and password. "
+        );
+      }
+    }
   };
 
   return (

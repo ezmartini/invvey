@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api/user.js";
 
-function RegisterForm() {
+function RegisterForm(props) {
   const [username, setUsername] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +21,20 @@ function RegisterForm() {
     } else {
       setErrMessage("");
       const userData = { username, businessName, password };
-      const response = await register(userData);
-      console.log(response);
+      try {
+        const response = await register(userData);
+        if (response.success) {
+          navigate("/login?register=true");
+        }
+      } catch (err) {
+        if (err.response.status === 409) {
+          setErrMessage("Oops! Looks like that username is already in use. ");
+        } else {
+          setErrMessage(
+            "Something went wrong under the hood. Try again later. "
+          );
+        }
+      }
     }
   };
 
@@ -90,14 +105,16 @@ function RegisterForm() {
 }
 function Register() {
   return (
-    <div className="container mt-4">
-      <h1 className="text-center"> Register for Invvey</h1>
-      <h4 className="text-center">
-        {" "}
-        Already have an account? Click <Link to="/login">here</Link> to login!
-      </h4>
-      {RegisterForm()}
-    </div>
+    <>
+      <div className="container mt-4">
+        <h1 className="text-center"> Register for Invvey</h1>
+        <h4 className="text-center">
+          {" "}
+          Already have an account? Click <Link to="/login">here</Link> to login!
+        </h4>
+        <RegisterForm />
+      </div>
+    </>
   );
 }
 
