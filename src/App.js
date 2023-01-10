@@ -6,6 +6,7 @@ import Login from "./pages/Login.mjs";
 import Dashboard from "./pages/Dashboard.mjs";
 import Products from "./pages/Products.mjs";
 import Product from "./pages/Product.mjs";
+import NewProduct from "./pages/NewProduct.mjs";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/products" element={<Products />} />
       <Route path="/product" element={<Product />} />
+      <Route path="/new-product" element={<NewProduct />} />
     </Routes>
   );
 }

@@ -21,18 +21,19 @@ export const myOrganizedProducts = async (userData) => {
 };
 
 // view a single product
-export const viewProduct = async (userData) => {
-  const axiosResponse = await axios.get(
-    requestURL("/api/product/:id", { withCredentials: true }),
-    userData
-  );
+export const viewProduct = async () => {
+  const axiosResponse = await axios.get(requestURL("/api/product/:id"), config);
 
   return axiosResponse.data;
 };
 
 // add a single product
 export const addProduct = async (userData) => {
-  const axiosResponse = await axios.post(requestURL("/api/product"), config);
+  const axiosResponse = await axios.post(
+    requestURL("/api/product"),
+    userData,
+    config
+  );
 
   return axiosResponse.data;
 };
