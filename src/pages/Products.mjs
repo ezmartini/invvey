@@ -20,6 +20,7 @@ function SingleProduct(props) {
         </th>
         <td> {props.currentStock}</td>
         <td> {unitsRemaining()}</td>
+        <td> {props.collection ? props.collection.name : "Default"}</td>
         <td> {props.stockStatus}</td>
       </tr>
     </>
@@ -62,13 +63,14 @@ export default function Products() {
 
     return (
       <>
-        {" "}
+        <h2> All saved products ({myFetched.length})</h2>
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>
               <th scope="col"> Product name </th>
               <th scope="col"> Current stock </th>
               <th scope="col"> Units from ideal </th>
+              <th scope="col"> Collection </th>
               <th scope="col"> Status </th>
             </tr>
           </thead>

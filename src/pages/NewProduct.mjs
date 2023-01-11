@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { myCollections } from "../api/collections.js";
 import { addProduct } from "../api/products.js";
 import Navbar from "../components/navbar/Navbar.mjs";
@@ -39,6 +40,7 @@ function NewProductForm() {
   const [lowStock, setLowStock] = useState(0);
   const [inCollection, setInCollection] = useState("default");
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,6 +58,8 @@ function NewProductForm() {
     } catch (error) {
       console.log(error);
     }
+
+    navigate("/products");
   };
 
   return (
