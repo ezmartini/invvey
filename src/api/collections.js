@@ -14,10 +14,10 @@ export const myCollections = async (userData) => {
 };
 
 // view a single collection
-export const viewCollection = async (userData) => {
+export const viewCollection = async (slug) => {
   const axiosResponse = await axios.get(
-    requestURL("/api/collection/:id", { withCredentials: true }),
-    userData
+    requestURL(`/api/collection/${slug}`),
+    config
   );
 
   return axiosResponse.data;

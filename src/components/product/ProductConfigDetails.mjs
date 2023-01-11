@@ -60,10 +60,9 @@ export default function ProductConfigDetails(props) {
               </p>{" "}
             </th>
             <td>
-              {" "}
-              {props.productInfo.collection
-                ? props.productInfo.collection
-                : "No collection"}
+              {props.productInfo.collectionName
+                ? props.productInfo.collectionName.name
+                : "Default collection"}
             </td>
           </tr>
 

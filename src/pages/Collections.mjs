@@ -62,6 +62,7 @@ export default function Collections() {
     return (
       <>
         {" "}
+        <h2> Your collections ({myFetched.length})</h2>
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>

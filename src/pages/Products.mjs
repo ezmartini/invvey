@@ -3,29 +3,7 @@ import { Link } from "react-router-dom";
 import { myProducts } from "../api/products.js";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
-
-function SingleProduct(props) {
-  function unitsRemaining() {
-    const difference = props.ideal - props.currentStock;
-    if (difference >= 0) {
-      return difference;
-    } else return `${Math.abs(difference)} (overstock)`;
-  }
-  return (
-    <>
-      <tr>
-        <th>
-          {" "}
-          <Link to={`/product/${props.slug}`}>{props.name} </Link>
-        </th>
-        <td> {props.currentStock}</td>
-        <td> {unitsRemaining()}</td>
-        <td> {props.collection ? props.collection.name : "Default"}</td>
-        <td> {props.stockStatus}</td>
-      </tr>
-    </>
-  );
-}
+import SingleProduct from "../components/product-table/SingleProduct.mjs";
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);
   const [mounted, setMounted] = useState(false);
@@ -45,7 +23,6 @@ export default function Products() {
   function generateProducts() {
     const productsToDisplay = [];
 
-    console.log(myFetched);
     for (const product of myFetched) {
       productsToDisplay.push(
         <SingleProduct

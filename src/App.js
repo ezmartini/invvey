@@ -22,7 +22,7 @@ function App() {
       <Route path="/product/:slug" element={<Product />} />
       <Route path="/new-product" element={<NewProduct />} />
       <Route path="/collections" element={<Collections />} />
-      <Route path="/collection" element={<Collection />} />
+      <Route path="/collection/:slug" element={<Collection />} />
 
       <Route path="/new-collection" element={<NewCollection />} />
     </Routes>

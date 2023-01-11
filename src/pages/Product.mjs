@@ -61,6 +61,8 @@ export default function Product() {
     }
   }
 
+  console.log(productInfo);
+
   return (
     <>
       {" "}
@@ -70,11 +72,10 @@ export default function Product() {
         <h2> {productInfo.name} </h2>
         <div className="col-lg-2 col-md-4 col-sm-6 p-0 text-center">
           <p className="border border-gray rounded p-2 bg-light text-secondary">
-            {" "}
-            {productInfo.collection
-              ? productInfo.collection
-              : "No collection"}{" "}
-          </p>{" "}
+            {productInfo.collectionName
+              ? productInfo.collectionName.name
+              : "Default collection"}
+          </p>
         </div>
         <p className="text-muted"> {productInfo.description} </p>
         <hr className="hr" />
