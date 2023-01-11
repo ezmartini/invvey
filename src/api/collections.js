@@ -1,5 +1,6 @@
 import axios from "axios";
 import { requestURL } from "./request";
+import config from "./config";
 
 // view all of my collections
 export const myCollections = async (userData) => {
@@ -24,8 +25,9 @@ export const viewCollection = async (userData) => {
 // add a single collection
 export const addCollection = async (userData) => {
   const axiosResponse = await axios.post(
-    requestURL("/api/collection", { withCredentials: true }),
-    userData
+    requestURL("/api/collection"),
+    userData,
+    config
   );
 
   return axiosResponse.data;

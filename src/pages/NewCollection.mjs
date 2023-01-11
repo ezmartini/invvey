@@ -13,7 +13,10 @@ function NewCollectionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const NewCollectionData = {};
+    const NewCollectionData = {
+      collectionName,
+      collectionDesc,
+    };
 
     try {
       const response = await addCollection(NewCollectionData);
