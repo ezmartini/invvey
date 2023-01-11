@@ -6,6 +6,7 @@ import config from "./config";
 export const myCollections = async (userData) => {
   const axiosResponse = await axios.get(
     requestURL("/api/collections"),
+    config,
     userData
   );
 
