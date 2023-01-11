@@ -1,14 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { myCollections } from "../api/collections.js";
 import { addProduct } from "../api/products.js";
 import Navbar from "../components/navbar/Navbar.mjs";
 
+function CollectionsSelect(collections) {
+  const toSelect = collections.map((collection) => (
+    <option value={collection._id} key={collection.name}>
+      {" "}
+      {collection.name}{" "}
+    </option>
+  ));
+
+  console.log(toSelect);
+  return toSelect;
+}
+
 function NewProductForm() {
+  const [mounted, setMounted] = useState(false);
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await myCollections();
+      setCollections(response.collections);
+    };
+
+    try {
+      fetchData();
+    } catch (err) {}
+    setMounted(true);
+  }, []);
+
   const [errMessage, setErrMessage] = useState("");
   const [productName, setProductName] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [currentStock, setCurrentStock] = useState(0);
   const [idealStock, setIdealStock] = useState(0);
   const [lowStock, setLowStock] = useState(0);
+  const [inCollection, setInCollection] = useState("default");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +48,11 @@ function NewProductForm() {
       productDesc,
       currentStock,
       lowStock,
+      inCollection,
     };
 
     try {
       const response = await addProduct(newProductData);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +67,7 @@ function NewProductForm() {
           {errMessage}{" "}
         </p>
       )}
-      <form onSubmit={handleSubmit}>
+      <form className="mb-3" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="productName"> Product name </label>
           <input
@@ -123,6 +152,28 @@ function NewProductForm() {
             onChange={(e) => setLowStock(e.target.value)}
             required
           />
+        </div>
+
+        <div className="form-group">
+          <label className="mb-0" htmlFor="exampleFormControlSelect1">
+            {" "}
+            Select collection{" "}
+          </label>
+          <p className="text-muted my-1">
+            {" "}
+            Organize your products by storing this product in a collection.
+          </p>
+          <select
+            onChange={(e) => {
+              setInCollection(e.target.value);
+              console.log(e.target.value);
+            }}
+            className="form-control"
+            id="exampleFormControlSelect1"
+          >
+            <option key="0"> Default collection </option>
+            {CollectionsSelect(collections)}
+          </select>
         </div>
 
         <button type="submit" className="btn btn-primary">

@@ -38,7 +38,7 @@ export default function Collections() {
     const collectionsToDisplay = [];
 
     for (const collection of myFetched) {
-      console.log(collection.allProducts.length);
+      console.log(collection.allProducts);
       collectionsToDisplay.push(
         <SingleCollection
           key={collection._id}
@@ -51,7 +51,7 @@ export default function Collections() {
           }
           OKproducts={
             collection.allProducts.filter(
-              (product) => product.stockStatus === "OK"
+              (product) => product.stockStatus == "OK"
             ).length
           }
           slug={collection.slug}
