@@ -21,8 +21,11 @@ export const myOrganizedProducts = async (userData) => {
 };
 
 // view a single product
-export const viewProduct = async () => {
-  const axiosResponse = await axios.get(requestURL("/api/product/:id"), config);
+export const viewProduct = async (slug) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/product/${slug}`),
+    config
+  );
 
   return axiosResponse.data;
 };

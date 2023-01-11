@@ -1,11 +1,15 @@
 import React from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StockStatusTag from "../components/product/StockStatusTag.mjs";
 import StockDetails from "../components/product/StockDetails.mjs";
 import ProductConfigDetails from "../components/product/ProductConfigDetails.mjs";
+import { viewProduct } from "../api/products.js";
+import { useParams } from "react-router-dom";
 
 export default function Product() {
+  const [params, setParams] = useState(useParams());
+
   const initialProduct = {
     name: "Olaplex No. 4 Bond Maintenance™ Shampoo",
     description: "No description provided. ",
@@ -15,11 +19,25 @@ export default function Product() {
     lowStockQuantity: 5,
     stockStatus: "OK",
     collection: "Client shampoos",
-    dateUpdated: "April 2, 2022",
-    dateCreated: "May 21, 2021",
+    dateLastUpdated: new Date().toDateString(),
+    dateCreated: new Date().toLocaleDateString(),
   };
 
   const [productInfo, setProductInfo] = useState(initialProduct);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await viewProduct(params.slug);
+      setProductInfo(response.product);
+    };
+
+    try {
+      fetchData();
+    } catch (err) {}
+    setMounted(true);
+  }, []);
+
   const initMode = "view";
   const [mode, setMode] = useState(initMode);
 
@@ -53,7 +71,9 @@ export default function Product() {
         <div className="col-lg-2 col-md-4 col-sm-6 p-0 text-center">
           <p className="border border-gray rounded p-2 bg-light text-secondary">
             {" "}
-            {productInfo.collection}{" "}
+            {productInfo.collection
+              ? productInfo.collection
+              : "No collection"}{" "}
           </p>{" "}
         </div>
         <p className="text-muted"> {productInfo.description} </p>
@@ -81,7 +101,7 @@ export default function Product() {
           {" "}
           <small>
             {" "}
-            <i> Last updated {productInfo.dateUpdated} </i>{" "}
+            <i> Last updated {productInfo.dateLastUpdated} </i>{" "}
           </small>
         </p>{" "}
       </section>

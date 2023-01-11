@@ -6,25 +6,19 @@ function NewProductForm() {
   const [errMessage, setErrMessage] = useState("");
   const [productName, setProductName] = useState("");
   const [productDesc, setProductDesc] = useState("");
-  const [stockStatus, setStockStatus] = useState("Low");
   const [currentStock, setCurrentStock] = useState(0);
+  const [idealStock, setIdealStock] = useState(0);
   const [lowStock, setLowStock] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentStock > lowStock && currentStock > 0) {
-      setStockStatus("OK");
-    } else if (currentStock == 0) {
-      setStockStatus("Zero");
-    }
-
     const newProductData = {
+      idealStock,
       productName,
       productDesc,
       currentStock,
       lowStock,
-      stockStatus,
     };
 
     try {
@@ -70,6 +64,7 @@ function NewProductForm() {
             onChange={(e) => setProductDesc(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label className="mb-0" htmlFor="currentUnits">
             Number of units currently in stock{" "}
@@ -85,6 +80,26 @@ function NewProductForm() {
             placeholder="Number of units"
             min="0"
             onChange={(e) => setCurrentStock(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="mb-0" htmlFor="currentUnits">
+            {" "}
+            Ideal stock quantity{" "}
+          </label>
+          <p className="text-muted my-1">
+            {" "}
+            The ideal number of units you typically like to keep in stock.{" "}
+          </p>
+          <input
+            type="number"
+            className="form-control"
+            id="numberInStock"
+            placeholder="Number of units"
+            min={lowStock}
+            onChange={(e) => setIdealStock(e.target.value)}
             required
           />
         </div>

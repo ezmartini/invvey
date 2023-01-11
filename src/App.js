@@ -7,6 +7,9 @@ import Dashboard from "./pages/Dashboard.mjs";
 import Products from "./pages/Products.mjs";
 import Product from "./pages/Product.mjs";
 import NewProduct from "./pages/NewProduct.mjs";
+import Collections from "./pages/Collections.mjs";
+import Collection from "./pages/Collection.mjs";
+import NewCollection from "./pages/NewCollection.mjs";
 
 function App() {
   return (
@@ -16,8 +19,12 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/products" element={<Products />} />
-      <Route path="/product" element={<Product />} />
+      <Route path="/product/:slug" element={<Product />} />
       <Route path="/new-product" element={<NewProduct />} />
+      <Route path="/collections" element={<Collections />} />
+      <Route path="/collection" element={<Collection />} />
+
+      <Route path="/new-collection" element={<NewCollection />} />
     </Routes>
   );
 }

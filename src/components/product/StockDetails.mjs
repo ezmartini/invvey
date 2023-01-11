@@ -3,6 +3,8 @@ import CurrentStock from "./StockDetails/CurrentStock.mjs";
 import EditStock from "./StockDetails/EditStock.mjs";
 
 export default function StockDetails(props) {
+  const difference =
+    props.productInfo.idealQuantity - props.productInfo.currentQuantity;
   function checkMode() {
     const quantity = props.productInfo.currentQuantity;
     if (props.mode === "editStock") {
@@ -43,9 +45,9 @@ export default function StockDetails(props) {
             </th>
             <td>
               {" "}
-              {props.productInfo.idealQuantity -
-                props.productInfo.currentQuantity}{" "}
-              units{" "}
+              {difference < 0
+                ? Math.abs(difference) + " units over"
+                : difference + " units"}{" "}
             </td>
           </tr>
         </tbody>
