@@ -1,9 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function SearchSortFilter() {
+export default function SearchSortFilter(props) {
+  const [search, setSearch] = useState("");
+
+  function onSearchSubmit(e) {
+    e.preventDefault();
+    props.handleSearch(search);
+  }
+
+  function onFilterChange(e) {
+    e.preventDefault();
+    props.handleFilter(e.target.value);
+  }
+
+  function onSortChange(e) {
+    e.preventDefault();
+    props.handleSort(e.target.value);
+  }
+
   return (
-    <section className="row">
-      <button className="btn btn-primary text-white"> Search </button>
+    <section className="mt-3 bg-light p-3 border">
+      <h4 className="text-secondary"> Search and sort</h4>
+      <form onSubmit={(e) => onSearchSubmit(e)}>
+        <div className="form-row mt-2">
+          <div className="form-group col-lg-4 col-sm-9">
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              className="form-control"
+              id="search"
+              placeholder="Search for product..."
+            />
+          </div>
+          <div className="form-group col-lg-2 col-sm-3">
+            <button type="submit" className="btn btn-primary">
+              {" "}
+              <i className="bi bi-search"></i>{" "}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div className="row">
+        <form className="col-lg-4">
+          <div>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="filter-icon">
+                  <i className="bi bi-filter"></i>
+                </span>
+              </div>
+              <select
+                onChange={(e) => onFilterChange(e)}
+                id="filter"
+                className="form-control"
+              >
+                <option selected value="0">
+                  {" "}
+                  Filter by stock status...{" "}
+                </option>
+                <option value="OK"> OK </option>
+                <option value="Low"> Low </option>
+                <option value="Zero"> Zero </option>
+              </select>
+            </div>
+            <div className="form-group col-lg-2 col-sm-3"></div>
+          </div>
+        </form>
+
+        <form className="col-lg-4">
+          <div>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="sort-icon">
+                  <i className="bi bi-sort-up-alt"></i>
+                </span>
+              </div>
+              <select
+                onChangeCapture={(e) => onSortChange(e)}
+                id="sort"
+                className="form-control"
+              >
+                <option selected> Sort by... </option>
+                <option value="statusHtoL"> Stock status (high to low) </option>
+                <option value="statusLtoH"> Stock status (low to high) </option>
+                <option value="stockHtoL"> Current stock (high to low) </option>
+                <option value="stockLtoH"> Current stock (low to high) </option>
+                <option value="alphaAtoZ"> Alphabetical (A-Z) </option>
+                <option value="alphaZtoA"> Alphabetical (Z-A) </option>
+              </select>
+            </div>
+            <div className="form-group col-lg-2 col-sm-3"></div>
+          </div>
+        </form>
+      </div>
     </section>
   );
 }

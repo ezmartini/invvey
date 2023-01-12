@@ -12,6 +12,33 @@ export const myProducts = async (userData) => {
   return axiosResponse.data;
 };
 
+export const searchProducts = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/products?search=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
+export const filterProducts = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/products?filter=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
+export const sortProducts = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/products?sort=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
 export const myOrganizedProducts = async (userData) => {
   const axiosResponse = await axios.get(
     requestURL("/api/products/all?organize=true"),

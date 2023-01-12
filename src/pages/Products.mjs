@@ -1,26 +1,64 @@
 import React from "react";
-import { myProducts } from "../api/products.js";
+import {
+  filterProducts,
+  myProducts,
+  searchProducts,
+  sortProducts,
+} from "../api/products.js";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
+
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);
   const [mounted, setMounted] = useState(false);
-  const [toFetch, setToFetch] = useState("");
+  const [isAll, setIsAll] = useState(true);
 
+  async function handleSearch(val) {
+    try {
+      const searched = await searchProducts(val);
+      if (searched) {
+        setMyFetched(
+          searched.products.filter((product) => !product.isArchived)
+        );
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
+
+  async function handleFilter(val) {
+    try {
+      const searched = await filterProducts(val);
+      if (searched) {
+        setMyFetched(
+          searched.products.filter((product) => !product.isArchived)
+        );
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
+
+  async function handleSort(val) {
+    try {
+      const searched = await sortProducts(val);
+      if (searched) {
+        setMyFetched(
+          searched.products.filter((product) => !product.isArchived)
+        );
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
   useEffect(() => {
     const fetchData = async () => {
-      let response;
-      if (toFetch === "") {
-        response = await myProducts();
-      }
-
+      const response = await myProducts();
       setMyFetched(response.products.filter((product) => !product.isArchived));
     };
 
     try {
       fetchData();
+      setIsAll(true);
     } catch (err) {}
     setMounted(true);
   }, []);
@@ -46,8 +84,16 @@ export default function Products() {
     return (
       <>
         {" "}
-        <h2> All saved products ({myFetched.length})</h2>
-        <SearchSortFilter />
+        {isAll ? (
+          <h2> All saved products ({myFetched.length})</h2>
+        ) : (
+          <h2> Results ({myFetched.length})</h2>
+        )}
+        <SearchSortFilter
+          handleSearch={handleSearch}
+          handleFilter={handleFilter}
+          handleSort={handleSort}
+        />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>
