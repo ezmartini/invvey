@@ -7,6 +7,10 @@ export default function EditIdeal(props) {
     setStock(value);
   }
 
+  function handleSave() {
+    // api call to change config here
+  }
+
   return (
     <td>
       {" "}
@@ -17,6 +21,13 @@ export default function EditIdeal(props) {
           placeholder={props.quantity}
         />{" "}
         <p className="ml-2"> units </p>
+        <p
+          onClick={handleSave}
+          className="text-success col-lg-1 col-md-1 col-sm-1 ml-2 text-center"
+        >
+          {" "}
+          <u> Save </u>
+        </p>
       </form>
     </td>
   );

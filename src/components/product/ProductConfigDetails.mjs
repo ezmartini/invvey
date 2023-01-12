@@ -3,9 +3,9 @@ import ViewIdeal from "./ProductConfig/ViewIdeal.mjs";
 import EditIdeal from "./ProductConfig/EditIdeal.mjs";
 
 export default function ProductConfigDetails(props) {
-  function checkMode(quantity) {
+  function checkMode(quantity, role) {
     if (props.mode === "editProduct") {
-      return <EditIdeal quantity={quantity} />;
+      return <EditIdeal role={role} quantity={quantity} />;
     } else {
       return <ViewIdeal quantity={quantity} />;
     }
@@ -29,7 +29,7 @@ export default function ProductConfigDetails(props) {
                 </small>
               </p>{" "}
             </th>
-            {checkMode(props.productInfo.idealQuantity)}
+            {checkMode(props.productInfo.idealQuantity, "idealQuantity")}
           </tr>
 
           <tr>
@@ -44,7 +44,7 @@ export default function ProductConfigDetails(props) {
                 </small>
               </p>{" "}
             </th>
-            {checkMode(props.productInfo.lowStockQuantity)}
+            {checkMode(props.productInfo.lowStockQuantity, "lowStockQuantity")}
           </tr>
 
           <tr>

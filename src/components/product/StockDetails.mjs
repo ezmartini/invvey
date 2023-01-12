@@ -5,10 +5,10 @@ import EditStock from "./StockDetails/EditStock.mjs";
 export default function StockDetails(props) {
   const difference =
     props.productInfo.idealQuantity - props.productInfo.currentQuantity;
-  function checkMode() {
+  function checkMode(role) {
     const quantity = props.productInfo.currentQuantity;
     if (props.mode === "editStock") {
-      return <EditStock quantity={quantity} />;
+      return <EditStock role={role} quantity={quantity} />;
     } else {
       return <CurrentStock quantity={quantity} />;
     }
@@ -27,7 +27,7 @@ export default function StockDetails(props) {
                 <small> Quantity currently available in your inventory. </small>
               </p>{" "}
             </th>
-            {checkMode()}
+            {checkMode("currentStock")}
           </tr>
 
           <tr>
