@@ -1,16 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { myProducts } from "../api/products.js";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
+import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const [toFetch, setToFetch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await myProducts();
+      let response;
+      if (toFetch === "") {
+        response = await myProducts();
+      }
+
       setMyFetched(response.products.filter((product) => !product.isArchived));
     };
 
@@ -40,7 +45,9 @@ export default function Products() {
 
     return (
       <>
+        {" "}
         <h2> All saved products ({myFetched.length})</h2>
+        <SearchSortFilter />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>

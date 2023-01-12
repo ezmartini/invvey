@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/user.js";
-import { useCookies } from "react-cookie";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
-  const [cookies, setCookie] = useCookies(["token"]);
 
   const navigate = useNavigate();
 
