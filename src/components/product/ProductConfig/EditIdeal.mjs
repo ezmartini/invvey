@@ -2,13 +2,10 @@ import React from "react";
 import { useState } from "react";
 
 export default function EditIdeal(props) {
-  const [stock, setStock] = useState(props.quantity);
-  function changeStock(value) {
-    setStock(value);
-  }
+  const [ideal, setIdeal] = useState(props.quantity);
 
-  function handleSave() {
-    // api call to change config here
+  function handleSave(val) {
+    props.saveConfig(props.role, val);
   }
 
   return (
@@ -17,13 +14,13 @@ export default function EditIdeal(props) {
       <form className="row">
         <input
           className="form-control col-lg-3 col-md-3 col-sm-3 ml-4 text-center gy-0 gx-0 mx-0"
-          onChange={(e) => changeStock(e.target.value)}
+          onChange={(e) => setIdeal(e.target.value)}
           placeholder={props.quantity}
         />{" "}
         <p className="ml-2"> units </p>
         <p
-          onClick={handleSave}
           className="text-success col-lg-1 col-md-1 col-sm-1 ml-2 text-center"
+          onClick={() => handleSave(ideal)}
         >
           {" "}
           <u> Save </u>

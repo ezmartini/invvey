@@ -6,8 +6,8 @@ export default function EditStock(props) {
     setStock(value);
   }
 
-  function handleSave() {
-    // make api call to edit current stock
+  async function handleSave(stock) {
+    await props.saveStock(stock);
   }
   return (
     <td>
@@ -17,10 +17,12 @@ export default function EditStock(props) {
           className="form-control col-lg-3 col-md-3 col-sm-3 ml-4 text-center gy-0 gx-0 mx-0"
           onChange={(e) => changeStock(e.target.value)}
           placeholder={props.quantity}
+          required
+          min={0}
         />{" "}
         <p className="ml-2 col-lg-3 col-md-2 col-sm-2"> units </p>
         <p
-          onClick={handleSave}
+          onClick={(e) => handleSave(stock)}
           className="text-success col-lg-1 col-md-1 col-sm-1 ml-2 text-center"
         >
           {" "}

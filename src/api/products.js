@@ -12,6 +12,26 @@ export const myProducts = async (userData) => {
   return axiosResponse.data;
 };
 
+export const editProduct = async (query, id) => {
+  const axiosResponse = await axios.post(
+    requestURL(`/api/product/edit?stock=${query}&id=${id}`),
+    {},
+    config
+  );
+
+  return axiosResponse.data;
+};
+
+export const editProductConfig = async (prop, query, id) => {
+  const axiosResponse = await axios.post(
+    requestURL(`/api/product/edit?prop=${prop}&change=${query}&id=${id}`),
+    {},
+    config
+  );
+
+  return axiosResponse.data;
+};
+
 export const searchProducts = async (query) => {
   const axiosResponse = await axios.get(
     requestURL(`/api/products?search=${query}`),

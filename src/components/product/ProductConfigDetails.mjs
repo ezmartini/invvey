@@ -1,19 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import ViewIdeal from "./ProductConfig/ViewIdeal.mjs";
 import EditIdeal from "./ProductConfig/EditIdeal.mjs";
+import { editProductConfig } from "../../api/products.js";
 
 export default function ProductConfigDetails(props) {
+  const [errMessage, setErrMessage] = useState("");
+
   function checkMode(quantity, role) {
     if (props.mode === "editProduct") {
-      return <EditIdeal role={role} quantity={quantity} />;
+      return (
+        <EditIdeal saveConfig={saveConfig} role={role} quantity={quantity} />
+      );
     } else {
       return <ViewIdeal quantity={quantity} />;
     }
   }
+
+  async function saveConfig(role, val) {
+    if (role === "idealQuantity" && val <= props.productInfo.lowStockQuantity) {
+      setErrMessage("Ideal quantity must be greater than low stock quantity.");
+    } else if (
+      role === "lowStockQuantity" &&
+      val > props.productInfo.lowStockQuantity
+    ) {
+      setErrMessage("Low stock quantity must be less than ideal quantity.");
+    } else {
+      try {
+        const response = await editProductConfig(
+          role,
+          val,
+          props.productInfo._id
+        );
+        props.refreshPage();
+      } catch (err) {}
+    }
+  }
+
   return (
     <>
       {" "}
       <h3> Product configuration details </h3>
+      {errMessage && (
+        <div class="alert alert-danger" role="alert">
+          {errMessage}
+        </div>
+      )}
       <table className="table table-hover table-sm">
         <tbody>
           <tr>
