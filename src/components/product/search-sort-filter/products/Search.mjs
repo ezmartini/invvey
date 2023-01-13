@@ -16,7 +16,7 @@ export default function Search(props) {
             type="text"
             className="form-control"
             id="search"
-            placeholder="Search for product..."
+            placeholder="Search..."
           />
         </div>
         <div className="form-group col-lg-2 col-sm-3">

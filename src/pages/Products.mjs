@@ -8,7 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
-import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
+import SearchSortFilter from "../components/product/search-sort-filter/products/SearchSortFilter.mjs";
 
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);

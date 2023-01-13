@@ -3,6 +3,7 @@ import Navbar from "../components/navbar/Navbar.mjs";
 import { useParams } from "react-router-dom";
 import { viewCollection } from "../api/collections.js";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
+import SearchSortFilter from "../components/product/search-sort-filter/products/SearchSortFilter.mjs";
 
 export default function Collection() {
   const initalCollection = {
@@ -54,6 +55,7 @@ export default function Collection() {
     return (
       <>
         <h2> Products in collection ({collectionInfo.allProducts.length}) </h2>
+        <SearchSortFilter />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>

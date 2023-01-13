@@ -53,12 +53,12 @@ export default function SortFilter(props) {
               className="form-control"
             >
               <option selected> Sort by... </option>
-              <option value="statusHtoL"> Stock status (high to low) </option>
-              <option value="statusLtoH"> Stock status (low to high) </option>
               <option value="stockHtoL"> Current stock (high to low) </option>
               <option value="stockLtoH"> Current stock (low to high) </option>
               <option value="alphaAtoZ"> Alphabetical (A-Z) </option>
               <option value="alphaZtoA"> Alphabetical (Z-A) </option>
+              <option value="mostRecent"> Most recently updated </option>
+              <option value="leastRecent"> Least recently updated </option>
             </select>
           </div>
           <div className="form-group col-lg-2 col-sm-3"></div>

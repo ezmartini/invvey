@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { myCollections } from "../api/collections.js";
 import Navbar from "../components/navbar/Navbar.mjs";
+import SearchSortFilter from "../components/collection/Search.mjs";
 
 function SingleCollection(props) {
   return (
@@ -21,6 +22,7 @@ function SingleCollection(props) {
 export default function Collections() {
   const [myFetched, setMyFetched] = useState([]);
   const [mounted, setMounted] = useState(false);
+  const [isAll, setIsAll] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +40,6 @@ export default function Collections() {
     const collectionsToDisplay = [];
 
     for (const collection of myFetched) {
-      console.log(collection.allProducts);
       collectionsToDisplay.push(
         <SingleCollection
           key={collection._id}
@@ -63,6 +64,7 @@ export default function Collections() {
       <>
         {" "}
         <h2> Your collections ({myFetched.length})</h2>
+        <SearchSortFilter />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>
