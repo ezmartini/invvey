@@ -53,7 +53,7 @@ export default function Product() {
 
   function refreshPage() {
     navigate(0);
-    setRefresh(true);
+    console.log("refresh");
   }
 
   return (

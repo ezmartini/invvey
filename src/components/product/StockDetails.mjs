@@ -1,11 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 import { editProduct } from "../../api/products.js";
 import CurrentStock from "./StockDetails/CurrentStock.mjs";
 import EditStock from "./StockDetails/EditStock.mjs";
 
 export default function StockDetails(props) {
   async function saveStock(val) {
+    console.log("save");
     try {
       const response = await editProduct(val, props.productInfo._id);
       props.refreshPage();
@@ -18,7 +19,12 @@ export default function StockDetails(props) {
     const quantity = props.productInfo.currentQuantity;
     if (props.mode === "editStock") {
       return (
-        <EditStock saveStock={saveStock} role={role} quantity={quantity} />
+        <EditStock
+          refreshPage={props.refreshPage}
+          saveStock={saveStock}
+          role={role}
+          quantity={quantity}
+        />
       );
     } else {
       return <CurrentStock quantity={quantity} />;

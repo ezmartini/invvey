@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { myCollections } from "../api/collections.js";
+import { filterCollections, myCollections } from "../api/collections.js";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
 
@@ -24,8 +24,14 @@ export default function Collections() {
   const [mounted, setMounted] = useState(false);
   const [isAll, setIsAll] = useState(true);
 
-  function handleFilter(val) {
-    console.log(val);
+  async function handleFilter(val) {
+    try {
+      const searched = await filterCollections(val);
+      if (searched) {
+        setMyFetched(searched.collections);
+        setIsAll(false);
+      }
+    } catch (err) {}
   }
 
   function handleSearch() {}

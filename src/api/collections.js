@@ -13,6 +13,15 @@ export const myCollections = async (userData) => {
   return axiosResponse.data;
 };
 
+export const filterCollections = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/collections?filter=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
 // view a single collection
 export const viewCollection = async (slug) => {
   const axiosResponse = await axios.get(

@@ -4,8 +4,8 @@ import { useState } from "react";
 export default function EditIdeal(props) {
   const [ideal, setIdeal] = useState(props.quantity);
 
-  function handleSave(val) {
-    props.saveConfig(props.role, val);
+  async function handleSave(val) {
+    await props.saveConfig(props.role, val);
   }
 
   return (
@@ -20,7 +20,7 @@ export default function EditIdeal(props) {
         <p className="ml-2"> units </p>
         <p
           className="text-success col-lg-1 col-md-1 col-sm-1 ml-2 text-center"
-          onClick={() => handleSave(ideal)}
+          onClick={(e) => handleSave(ideal)}
         >
           {" "}
           <u> Save </u>

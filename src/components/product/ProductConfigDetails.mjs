@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ViewIdeal from "./ProductConfig/ViewIdeal.mjs";
 import EditIdeal from "./ProductConfig/EditIdeal.mjs";
 import { editProductConfig } from "../../api/products.js";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductConfigDetails(props) {
   const [errMessage, setErrMessage] = useState("");
@@ -9,7 +10,12 @@ export default function ProductConfigDetails(props) {
   function checkMode(quantity, role) {
     if (props.mode === "editProduct") {
       return (
-        <EditIdeal saveConfig={saveConfig} role={role} quantity={quantity} />
+        <EditIdeal
+          refreshPage={props.refreshPage}
+          saveConfig={saveConfig}
+          role={role}
+          quantity={quantity}
+        />
       );
     } else {
       return <ViewIdeal quantity={quantity} />;
@@ -21,7 +27,7 @@ export default function ProductConfigDetails(props) {
       setErrMessage("Ideal quantity must be greater than low stock quantity.");
     } else if (
       role === "lowStockQuantity" &&
-      val > props.productInfo.lowStockQuantity
+      val > props.productInfo.idealQuantity
     ) {
       setErrMessage("Low stock quantity must be less than ideal quantity.");
     } else {
@@ -32,7 +38,9 @@ export default function ProductConfigDetails(props) {
           props.productInfo._id
         );
         props.refreshPage();
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
