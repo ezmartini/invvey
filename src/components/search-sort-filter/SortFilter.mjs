@@ -11,9 +11,27 @@ export default function SortFilter(props) {
     props.handleSort(e.target.value);
   }
 
+  const filter = props.filterOpts.map((opt) => {
+    return (
+      <option key={opt.val} value={opt.val}>
+        {" "}
+        {opt.inner}
+      </option>
+    );
+  });
+
+  const sort = props.sortOpts.map((opt) => {
+    return (
+      <option key={opt.val} value={opt.val}>
+        {" "}
+        {opt.inner}
+      </option>
+    );
+  });
+
   return (
     <div className="row">
-      <form className="col-lg-4">
+      <form className="col-lg-6">
         <div>
           <div className="input-group">
             <div className="input-group-prepend">
@@ -28,18 +46,16 @@ export default function SortFilter(props) {
             >
               <option selected value="0">
                 {" "}
-                Filter by stock status...{" "}
+                Filter by...{" "}
               </option>
-              <option value="OK"> OK </option>
-              <option value="Low"> Low </option>
-              <option value="Zero"> Zero </option>
+              {filter}
             </select>
           </div>
           <div className="form-group col-lg-2 col-sm-3"></div>
         </div>
       </form>
 
-      <form className="col-lg-4">
+      <form className="col-lg-6">
         <div>
           <div className="input-group">
             <div className="input-group-prepend">
@@ -53,12 +69,7 @@ export default function SortFilter(props) {
               className="form-control"
             >
               <option selected> Sort by... </option>
-              <option value="stockHtoL"> Current stock (high to low) </option>
-              <option value="stockLtoH"> Current stock (low to high) </option>
-              <option value="alphaAtoZ"> Alphabetical (A-Z) </option>
-              <option value="alphaZtoA"> Alphabetical (Z-A) </option>
-              <option value="mostRecent"> Most recently updated </option>
-              <option value="leastRecent"> Least recently updated </option>
+              {sort}
             </select>
           </div>
           <div className="form-group col-lg-2 col-sm-3"></div>

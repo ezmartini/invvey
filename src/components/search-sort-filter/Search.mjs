@@ -10,7 +10,7 @@ export default function Search(props) {
   return (
     <form onSubmit={(e) => onSearchSubmit(e)}>
       <div className="form-row mt-2">
-        <div className="form-group col-lg-4 col-sm-9">
+        <div className="form-group col-lg-11 col-sm-9">
           <input
             onChange={(e) => setSearch(e.target.value)}
             type="text"
@@ -19,7 +19,7 @@ export default function Search(props) {
             placeholder="Search..."
           />
         </div>
-        <div className="form-group col-lg-2 col-sm-3">
+        <div className="form-group col-lg-1 col-sm-3">
           <button type="submit" className="btn btn-primary">
             {" "}
             <i className="bi bi-search"></i>{" "}

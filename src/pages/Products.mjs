@@ -8,7 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
-import SearchSortFilter from "../components/product/search-sort-filter/products/SearchSortFilter.mjs";
+import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
 
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);
@@ -93,6 +93,19 @@ export default function Products() {
           handleSearch={handleSearch}
           handleFilter={handleFilter}
           handleSort={handleSort}
+          sortOpts={[
+            { val: "stockHtoL", inner: "Current stock (high to low)" },
+            { val: "stockLtoH", inner: "Current stock (low to high)" },
+            { val: "alphaAtoZ", inner: "Alphabetical (A-Z)" },
+            { val: "alphaZtoA", inner: "Alphabetical (Z-A)" },
+            { val: "mostRecent", inner: "Most recently updated" },
+            { val: "leastRecent", inner: "Least recently updated " },
+          ]}
+          filterOpts={[
+            { val: "OK", inner: "OK stock products" },
+            { val: "Low", inner: "Low stock products" },
+            { val: "Zero", inner: "Zero stock products" },
+          ]}
         />
         <table className="table table-sm table-striped mt-3">
           <thead>

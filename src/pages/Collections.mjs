@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { myCollections } from "../api/collections.js";
 import Navbar from "../components/navbar/Navbar.mjs";
-import SearchSortFilter from "../components/collection/Search.mjs";
+import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
 
 function SingleCollection(props) {
   return (
@@ -23,6 +23,14 @@ export default function Collections() {
   const [myFetched, setMyFetched] = useState([]);
   const [mounted, setMounted] = useState(false);
   const [isAll, setIsAll] = useState(true);
+
+  function handleFilter(val) {
+    console.log(val);
+  }
+
+  function handleSearch() {}
+
+  function handleSort() {}
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,7 +72,36 @@ export default function Collections() {
       <>
         {" "}
         <h2> Your collections ({myFetched.length})</h2>
-        <SearchSortFilter />
+        <SearchSortFilter
+          handleSearch={handleSearch}
+          handleFilter={handleFilter}
+          handleSort={handleSort}
+          sortOpts={[
+            {
+              val: "prodsHtoL",
+              inner: "Total number of products (high to low)",
+            },
+            {
+              val: "productsLtoH",
+              inner: "Total number of products (low to high)",
+            },
+            {
+              val: "zeroHtoL",
+              inner: "Number of zero stock items (high to low)",
+            },
+            {
+              val: "lowHtoL",
+              inner: "Number of low stock items (high to low)",
+            },
+            {
+              val: "okHtoL",
+              inner: "Number of OK stock items (high to low)",
+            },
+          ]}
+          filterOpts={[
+            { val: "crticial", inner: "Collections with only zero products" },
+          ]}
+        />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>

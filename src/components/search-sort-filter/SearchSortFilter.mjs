@@ -9,6 +9,8 @@ export default function SearchSortFilter(props) {
 
       <Search handleSearch={props.handleSearch} />
       <SortFilter
+        filterOpts={props.filterOpts}
+        sortOpts={props.sortOpts}
         handleSort={props.handleSort}
         handleFilter={props.handleFilter}
       />

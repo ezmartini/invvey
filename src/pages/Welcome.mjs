@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom";
-
 function Welcome() {
   return (
-    <div className="container mt-4">
+    <div className="container text-center mt-5">
       {" "}
-      <h1 className="text-center"> Welcome to Invvey </h1>
-      <div className="container text-center row w-40 mt-5">
+      <h1> Welcome to Invvey </h1>
+      <div className="container w-40 mt-5 row ">
         {" "}
-        <div className="col">
-          <Link to="/register"> Register </Link>
+        <div className="col-6">
+          <a href="/login"> Login </a>
         </div>
-        <div className="col">
-          <Link to="/Login"> Login </Link>{" "}
+        <div className="col-6">
+          <a href="/register"> Register </a>
         </div>
       </div>
     </div>
