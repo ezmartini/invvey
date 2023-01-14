@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { filterCollections, myCollections } from "../api/collections.js";
+import {
+  filterCollections,
+  myCollections,
+  searchCollections,
+  sortCollections,
+} from "../api/collections.js";
 import Navbar from "../components/navbar/Navbar.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
 
@@ -34,9 +39,25 @@ export default function Collections() {
     } catch (err) {}
   }
 
-  function handleSearch() {}
+  async function handleSearch(val) {
+    try {
+      const searched = await searchCollections(val);
+      if (searched) {
+        setMyFetched(searched.collections);
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
 
-  function handleSort() {}
+  async function handleSort(val) {
+    try {
+      const searched = await sortCollections(val);
+      if (searched) {
+        setMyFetched(searched.collections);
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,28 +105,17 @@ export default function Collections() {
           handleSort={handleSort}
           sortOpts={[
             {
-              val: "prodsHtoL",
-              inner: "Total number of products (high to low)",
+              val: "alphaAtoZ",
+              inner: "Alphabetical (A to Z)",
             },
             {
-              val: "productsLtoH",
-              inner: "Total number of products (low to high)",
-            },
-            {
-              val: "zeroHtoL",
-              inner: "Number of zero stock items (high to low)",
-            },
-            {
-              val: "lowHtoL",
-              inner: "Number of low stock items (high to low)",
-            },
-            {
-              val: "okHtoL",
-              inner: "Number of OK stock items (high to low)",
+              val: "alphaZtoA",
+              inner: "Alphabetical (Z to A)",
             },
           ]}
           filterOpts={[
-            { val: "crticial", inner: "Collections with only zero products" },
+            { val: "noDesc", inner: "View collections with no descriptions" },
+            { val: "yesDesc", inner: "View collections with descriptions" },
           ]}
         />
         <table className="table table-sm table-striped mt-3">

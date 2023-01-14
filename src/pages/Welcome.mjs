@@ -1,15 +1,23 @@
 function Welcome() {
   return (
-    <div className="container text-center mt-5">
-      {" "}
-      <h1> Welcome to Invvey </h1>
-      <div className="container w-40 mt-5 row ">
+    <div className="page pattern p-1">
+      <div className="container text-center mt-5 p-5 landing">
         {" "}
-        <div className="col-6">
-          <a href="/login"> Login </a>
-        </div>
-        <div className="col-6">
-          <a href="/register"> Register </a>
+        <h1> Welcome to Invvey! </h1>
+        <div className="container mt-3 row mb-2">
+          {" "}
+          <div className="col-6">
+            <a className="btn btn-outline-primary" href="/login">
+              {" "}
+              Login{" "}
+            </a>
+          </div>
+          <div className="col-6">
+            <a className="btn btn-primary" href="/register">
+              {" "}
+              Register{" "}
+            </a>
+          </div>
         </div>
       </div>
     </div>

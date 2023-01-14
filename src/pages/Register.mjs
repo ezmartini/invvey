@@ -106,13 +106,16 @@ function RegisterForm(props) {
 function Register() {
   return (
     <>
-      <div className="container mt-4">
-        <h1 className="text-center"> Register for Invvey</h1>
-        <h4 className="text-center">
-          {" "}
-          Already have an account? Click <Link to="/login">here</Link> to login!
-        </h4>
-        <RegisterForm />
+      <div className="page pattern">
+        <div className="container mt-4 p-5 landing">
+          <h1 className="text-center"> Register for Invvey</h1>
+          <h4 className="text-center">
+            {" "}
+            Already have an account? Click <Link to="/login">here</Link> to
+            login!
+          </h4>
+          <RegisterForm />
+        </div>
       </div>
     </>
   );

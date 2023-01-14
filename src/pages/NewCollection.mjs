@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { addCollection } from "../api/collections.js";
 import Navbar from "../components/navbar/Navbar.mjs";
 
@@ -10,6 +11,8 @@ function NewCollectionForm() {
   const [collectionName, setCollectionName] = useState("");
   const [collectionDesc, setCollectionDesc] = useState("");
 
+  const nav = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,7 +23,7 @@ function NewCollectionForm() {
 
     try {
       const response = await addCollection(NewCollectionData);
-      console.log(response);
+      nav("/collections");
     } catch (error) {
       console.log(error);
     }

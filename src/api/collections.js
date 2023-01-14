@@ -22,6 +22,24 @@ export const filterCollections = async (query) => {
   return axiosResponse.data;
 };
 
+export const searchCollections = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/collections?search=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
+export const sortCollections = async (query) => {
+  const axiosResponse = await axios.get(
+    requestURL(`/api/collections?sort=${query}`),
+    config
+  );
+
+  return axiosResponse.data;
+};
+
 // view a single collection
 export const viewCollection = async (slug) => {
   const axiosResponse = await axios.get(

@@ -71,14 +71,16 @@ function RegisterForm() {
 }
 function Login() {
   return (
-    <div className="container mt-4">
-      <h1 className="text-center"> Welcome back to Invvey! </h1>
-      <h4 className="text-center">
-        {" "}
-        Don't have an account? Click <Link to="/register">here</Link> to
-        register!
-      </h4>
-      {RegisterForm()}
+    <div className="page pattern">
+      <div className="container mt-4 p-5 landing">
+        <h1 className="text-center"> Welcome back to Invvey! </h1>
+        <h4 className="text-center">
+          {" "}
+          Don't have an account? Click <Link to="/register">here</Link> to
+          register!
+        </h4>
+        {RegisterForm()}
+      </div>
     </div>
   );
 }

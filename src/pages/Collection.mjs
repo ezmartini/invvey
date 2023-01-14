@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { viewCollection } from "../api/collections.js";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
+import { searchProducts } from "../api/products.js";
 
 export default function Collection() {
   const initalCollection = {
@@ -12,10 +13,10 @@ export default function Collection() {
     allProducts: [],
     _id: "12345",
   };
-
   const [params, setParams] = useState(useParams());
   const [mounted, setMounted] = useState(false);
   const [collectionInfo, setCollectionInfo] = useState(initalCollection);
+  const [isAll, setIsAll] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,12 @@ export default function Collection() {
     } catch (err) {}
     setMounted(true);
   }, []);
+
+  async function handleFilter(val) {}
+
+  async function handleSearch(val) {}
+
+  async function handleSort(val) {}
 
   function generateCollection() {
     const productsToDisplay = [];
@@ -55,7 +62,24 @@ export default function Collection() {
     return (
       <>
         <h2> Products in collection ({collectionInfo.allProducts.length}) </h2>
-        <SearchSortFilter />
+        <SearchSortFilter
+          handleSearch={handleSearch}
+          handleFilter={handleFilter}
+          handleSort={handleSort}
+          sortOpts={[
+            { val: "stockHtoL", inner: "Current stock (high to low)" },
+            { val: "stockLtoH", inner: "Current stock (low to high)" },
+            { val: "alphaAtoZ", inner: "Alphabetical (A-Z)" },
+            { val: "alphaZtoA", inner: "Alphabetical (Z-A)" },
+            { val: "mostRecent", inner: "Most recently updated" },
+            { val: "leastRecent", inner: "Least recently updated " },
+          ]}
+          filterOpts={[
+            { val: "OK", inner: "OK stock products" },
+            { val: "Low", inner: "Low stock products" },
+            { val: "Zero", inner: "Zero stock products" },
+          ]}
+        />
         <table className="table table-sm table-striped mt-3">
           <thead>
             <tr>
@@ -77,10 +101,6 @@ export default function Collection() {
       <section className="container mt-3">
         <h1> {collectionInfo.name} </h1>
         <p className="text-muted"> {collectionInfo.description} </p>
-        <a className="btn btn-primary text-white" href="/new-product">
-          {" "}
-          + Add new product to this collection
-        </a>
         <hr className="hr" />
         {mounted && generateCollection()}
       </section>
