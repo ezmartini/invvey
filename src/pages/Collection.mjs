@@ -4,7 +4,11 @@ import { useParams } from "react-router-dom";
 import { viewCollection } from "../api/collections.js";
 import SingleProduct from "../components/product-table/SingleProduct.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
-import { searchProducts } from "../api/products.js";
+import {
+  filterProducts,
+  searchProducts,
+  sortProducts,
+} from "../api/products.js";
 
 export default function Collection() {
   const initalCollection = {
@@ -22,6 +26,7 @@ export default function Collection() {
     const fetchData = async () => {
       const response = await viewCollection(params.slug);
       setCollectionInfo(response.collection);
+      console.log(collectionInfo);
     };
 
     try {
@@ -30,11 +35,62 @@ export default function Collection() {
     setMounted(true);
   }, []);
 
-  async function handleFilter(val) {}
+  async function handleFilter(val) {
+    try {
+      const searched = await filterProducts(val, collectionInfo._id);
+      if (searched) {
+        setCollectionInfo((oldState) => ({
+          _id: oldState._id,
+          description: oldState.description,
+          name: oldState.name,
+          allProducts: (oldState.allProducts = searched.products.filter(
+            (product) => {
+              return !product.isArchived;
+            }
+          )),
+        }));
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
 
-  async function handleSearch(val) {}
+  async function handleSearch(val) {
+    try {
+      const searched = await searchProducts(val, collectionInfo._id);
+      if (searched) {
+        setCollectionInfo((oldState) => ({
+          _id: oldState._id,
+          description: oldState.description,
+          name: oldState.name,
+          allProducts: (oldState.allProducts = searched.products.filter(
+            (product) => {
+              return !product.isArchived;
+            }
+          )),
+        }));
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
 
-  async function handleSort(val) {}
+  async function handleSort(val) {
+    try {
+      const searched = await sortProducts(val, collectionInfo._id);
+      if (searched) {
+        setCollectionInfo((oldState) => ({
+          _id: oldState._id,
+          description: oldState.description,
+          name: oldState.name,
+          allProducts: (oldState.allProducts = searched.products.filter(
+            (product) => {
+              return !product.isArchived;
+            }
+          )),
+        }));
+        setIsAll(false);
+      }
+    } catch (err) {}
+  }
 
   function generateCollection() {
     const productsToDisplay = [];
@@ -90,7 +146,14 @@ export default function Collection() {
               <th scope="col"> Status </th>
             </tr>
           </thead>
-          <tbody>{productsToDisplay}</tbody>
+          {productsToDisplay.length > 0 ? (
+            <tbody>{productsToDisplay}</tbody>
+          ) : (
+            <p className="mt-2 text-secondary">
+              {" "}
+              <i> No products to display. </i>{" "}
+            </p>
+          )}
         </table>
       </>
     );

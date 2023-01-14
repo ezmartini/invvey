@@ -32,27 +32,39 @@ export const editProductConfig = async (prop, query, id) => {
   return axiosResponse.data;
 };
 
-export const searchProducts = async (query) => {
+export const searchProducts = async (query, id) => {
+  let additional = "";
+  if (id) {
+    additional = `&collection=${id}`;
+  }
   const axiosResponse = await axios.get(
-    requestURL(`/api/products?search=${query}`),
+    requestURL(`/api/products?search=${query}` + additional),
     config
   );
 
   return axiosResponse.data;
 };
 
-export const filterProducts = async (query) => {
+export const filterProducts = async (query, id) => {
+  let additional = "";
+  if (id) {
+    additional = `&collection=${id}`;
+  }
   const axiosResponse = await axios.get(
-    requestURL(`/api/products?filter=${query}`),
+    requestURL(`/api/products?filter=${query}` + additional),
     config
   );
 
   return axiosResponse.data;
 };
 
-export const sortProducts = async (query) => {
+export const sortProducts = async (query, id) => {
+  let additional = "";
+  if (id) {
+    additional = `&collection=${id}`;
+  }
   const axiosResponse = await axios.get(
-    requestURL(`/api/products?sort=${query}`),
+    requestURL(`/api/products?sort=${query}` + additional),
     config
   );
 

@@ -19,7 +19,7 @@ export default function Product() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await viewProduct(params.slug);
-      return response;
+      setProductInfo(response.product);
     };
 
     try {
