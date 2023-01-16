@@ -33,11 +33,15 @@ function Dashboard() {
       setProducts({ all: productResponse.products, low, zero });
       setProductTable(productTableResponse.products.splice(0, 5));
       setMounted(true);
+
+      return true;
     };
 
     try {
-      fetchData();
-    } catch (err) {}
+      const res = fetchData();
+    } catch (err) {
+      // handle err
+    }
   }, []);
 
   return (
