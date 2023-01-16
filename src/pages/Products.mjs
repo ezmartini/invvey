@@ -7,8 +7,8 @@ import {
 } from "../api/products.js";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar.mjs";
-import SingleProduct from "../components/product-table/SingleProduct.mjs";
 import SearchSortFilter from "../components/search-sort-filter/SearchSortFilter.mjs";
+import ProductTable from "../components/product-table/ProductTable.mjs";
 
 export default function Products() {
   const [myFetched, setMyFetched] = useState([]);
@@ -58,29 +58,12 @@ export default function Products() {
 
     try {
       fetchData();
+      setMounted(true);
       setIsAll(true);
     } catch (err) {}
-    setMounted(true);
   }, []);
 
   function generateProducts() {
-    const productsToDisplay = [];
-
-    for (const product of myFetched) {
-      productsToDisplay.push(
-        <SingleProduct
-          key={product._id}
-          name={product.name}
-          currentStock={product.currentQuantity}
-          lowStock={product.lowStockQuantity}
-          stockStatus={product.stockStatus}
-          collection={product.collectionName}
-          slug={product.slug}
-          ideal={product.idealQuantity}
-        />
-      );
-    }
-
     return (
       <>
         {" "}
@@ -107,18 +90,7 @@ export default function Products() {
             { val: "Zero", inner: "Zero stock products" },
           ]}
         />
-        <table className="table table-sm table-striped mt-3">
-          <thead>
-            <tr>
-              <th scope="col"> Product name </th>
-              <th scope="col"> Current stock </th>
-              <th scope="col"> Units from ideal </th>
-              <th scope="col"> Collection </th>
-              <th scope="col"> Status </th>
-            </tr>
-          </thead>
-          <tbody>{productsToDisplay}</tbody>
-        </table>
+        {!mounted ? <> </> : <ProductTable toDisplay={myFetched} />}
       </>
     );
   }

@@ -1,6 +1,4 @@
 import ProductCard from "./ProductCard.mjs";
-import { useState } from "react";
-import { myOrganizedProducts } from "../../api/products.js";
 
 function ProductCards(props) {
   // set states for numbers on each card here (3x api calls)
@@ -24,6 +22,7 @@ function ProductCards(props) {
             title="Low Stock Products"
             iconPostfix="shield-fill-exclamation"
           />
+
           <ProductCard
             number={props.overview.zero.length}
             borderPostfix="danger"

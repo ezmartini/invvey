@@ -45,7 +45,7 @@ export const searchProducts = async (query, id) => {
   return axiosResponse.data;
 };
 
-export const filterProducts = async (query, id) => {
+export const filterProducts = async (query, id, limit) => {
   let additional = "";
   if (id) {
     additional = `&collection=${id}`;
@@ -58,10 +58,14 @@ export const filterProducts = async (query, id) => {
   return axiosResponse.data;
 };
 
-export const sortProducts = async (query, id) => {
+export const sortProducts = async (query, id, limit) => {
   let additional = "";
   if (id) {
     additional = `&collection=${id}`;
+  }
+
+  if (limit) {
+    additional = "&limit=true";
   }
   const axiosResponse = await axios.get(
     requestURL(`/api/products?sort=${query}` + additional),
